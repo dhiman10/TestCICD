@@ -1,0 +1,30 @@
+name: iOS TestFlight Upload
+
+on:
+  push:
+    tags:
+      - "testflight"
+
+jobs:
+  build-and-upload:
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.1
+
+      - name: Install dependencies
+        run: |
+          gem install bundler
+          bundle install || (bundle init && echo 'gem "fastlane"' >> Gemfile && bundle install)
+
+      - name: Run Fastlane release lane
+        env:
+          FASTLANE_USER: ${{ secrets.APPLE_ID }}
+          FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD: ${{ secrets.APP_SPECIFIC_PASSWORD }}
+        run: bundle exec fastlane release_app
