@@ -5,4 +5,7 @@
 # For more information about the Appfile, see:
 #     https://docs.fastlane.tools/advanced/#appfile
 
+app_identifier("com.Dhiman.simple.TestCICD1")     
+apple_id("sabuj.iosdeveloper@gmail.com")
 ENV["FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD"] = "yudd-aowo-cvsx-qazw"
+
