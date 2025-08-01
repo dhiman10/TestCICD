@@ -30,7 +30,4 @@ jobs:
 
       - name: Run Fastlane release lane
         run: bundle exec fastlane release_app
-        env:
-          FASTLANE_USER: ${{ secrets.APPLE_ID }}
-          FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD: ${{ secrets.APP_SPECIFIC_PASSWORD }}
 
