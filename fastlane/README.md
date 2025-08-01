@@ -21,7 +21,7 @@ For _fastlane_ installation instructions, see [Installing _fastlane_](https://do
 [bundle exec] fastlane ios release_app
 ```
 
-Releases our app to the App Store
+Releases our app to TestFlight
 
 ### ios export_app
 
@@ -37,7 +37,7 @@ To export our app
 [bundle exec] fastlane ios upload_app
 ```
 
-To deliver our app
+To upload app to TestFlight
 
 ----
 

@@ -17,7 +17,7 @@ default_platform(:ios)
 
 platform :ios do
 
-  desc "Releases our app to the App Store"
+  desc "Releases our app to TestFlight"
   lane :release_app do
     export_app
     upload_app
@@ -30,20 +30,24 @@ platform :ios do
       scheme: "TestCICD",
       clean: true,
       export_xcargs: "-allowProvisioningUpdates",
-      output_name: "ReleaseApp.ipa"
+      output_name: "ReleaseApp.ipa",
+      xcargs: "-showBuildTimingSummary",
+      verbose: true
     )
   end
 
-  desc "To deliver our app"
+  desc "To upload app to TestFlight"
   lane :upload_app do
     deliver(
       ipa: "ReleaseApp.ipa",
       skip_screenshots: true,
       skip_metadata: true,
       skip_app_version_update: true,
-      force: true
+      force: true,
+      submit_for_review: false,       # prevents full App Store review
+      distribute_external: false,     # internal TestFlight testers only
+      automatic_release: true         # make it immediately available
     )
   end
 
 end
-
