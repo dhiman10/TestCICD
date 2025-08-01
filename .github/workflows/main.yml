@@ -2,12 +2,11 @@ name: iOS TestFlight Upload
 
 on:
   push:
-    tags:
-      - "testflight-*"
-
+    branches:
+      - main
 jobs:
   build-and-upload:
-    runs-on: macos-14
+    runs-on: macos-14  # uses latest stable Xcode (usually 15.x)
 
     steps:
       - name: Checkout code
