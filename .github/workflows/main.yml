@@ -4,9 +4,12 @@ on:
   push:
     branches:
       - main
+
+workflow_dispatch:
+
 jobs:
   build-and-upload:
-    runs-on: macos-14  # uses latest stable Xcode (usually 15.x)
+    runs-on: macos-latest  # uses latest stable Xcode (usually 15.x)
 
     steps:
       - name: Checkout code
@@ -21,6 +24,9 @@ jobs:
         run: |
           gem install bundler
           bundle install || (bundle init && echo 'gem "fastlane"' >> Gemfile && bundle install)
+
+      - name: 🧹 Clear Derived Data
+        run: rm -rf ~/Library/Developer/Xcode/DerivedData/*
 
       - name: Run Fastlane release lane
         env:
